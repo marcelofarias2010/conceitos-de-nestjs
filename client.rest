@@ -1,0 +1,80 @@
+@baseUrl = http://localhost:3000
+
+# RECADOS
+### Lista todos os recados
+GET {{baseUrl}}/recados/
+?limit=10
+&offset=0
+Authorization: Bearer 123456
+### Lista apenas um recado
+GET {{baseUrl}}/recados/10/
+
+### Cria um recado
+POST {{baseUrl}}/recados/
+Content-Type: application/json
+
+  {
+    "texto": "Recado de Elizangela para Marcelo",
+    "deId": 8,
+    "paraId": 7
+  }
+
+### Atualiza um recado
+PATCH  {{baseUrl}}/recados/1/
+Content-Type: application/json
+
+  {
+    "texto": "Atualização do recado",
+    "lido": true  
+  }
+
+### Apaga um recado
+DELETE {{baseUrl}}/recados/4/
+
+
+### AppControllerGet
+
+# @name AppControllerGet
+
+GET {{baseUrl}}/
+
+### ConceitosManualController
+
+# @name ConceitosManualController
+
+GET {{baseUrl}}/conceitos-manual/
+
+### ConceitosAutomaticoController
+
+# @name ConceitosAutomaticoController
+
+GET {{baseUrl}}/conceitos-automatico/
+
+# PESSOAS
+### Lista todas as pessoas
+GET {{baseUrl}}/pessoas/
+
+### Lista apenas uma pessoa
+GET {{baseUrl}}/pessoas/4/
+
+### Cria uma pessoa
+POST {{baseUrl}}/pessoas/
+Content-Type: application/json
+
+  {
+    "email": "eliza@email.com",
+    "password": "123456",
+    "nome": "Elizângela"
+  }
+
+### Atualiza uma pessoa
+PATCH  {{baseUrl}}/pessoas/6/
+Content-Type: application/json
+
+  {
+    "password": "654321",
+    "nome": "Maria"  
+  }
+
+### Apaga uma pessoa
+DELETE {{baseUrl}}/pessoas/3/
