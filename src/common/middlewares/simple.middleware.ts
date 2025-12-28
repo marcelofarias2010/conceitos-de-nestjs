@@ -3,13 +3,13 @@ import { NextFunction, Request, Response } from 'express';
 
 export class SimpleMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    console.log('SimpleMiddleware Olá');
     const autorization = req.headers?.authorization;
 
     if (autorization) {
       req['user'] = {
         nome: 'Luiz',
         sobrenome: 'Otávio',
+        role: 'admin',
       };
     }
 
@@ -20,8 +20,6 @@ export class SimpleMiddleware implements NestMiddleware {
     //});
 
     next();
-
-    console.log('SimpleMiddleware: Tchau');
 
     res.on('finish', () => {
       console.log('SimpleMiddleware: Terminou');

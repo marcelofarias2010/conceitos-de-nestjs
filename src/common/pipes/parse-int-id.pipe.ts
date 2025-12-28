@@ -4,7 +4,7 @@ import {
   Injectable,
   PipeTransform,
 } from '@nestjs/common';
-
+/** Saõ utilizados para manipular, transformar ou validar parametros e o body*/
 @Injectable()
 export class ParseIntIdPipe implements PipeTransform {
   transform(value: any, metadata: ArgumentMetadata) {
