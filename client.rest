@@ -1,26 +1,29 @@
 @baseUrl = http://localhost:3000
+@authToken = {{authenticate.response.body.accessToken}}
+@refreshToken = {{authenticate.response.body.refreshToken}}
 
 # RECADOS
 ### Lista todos os recados
 GET {{baseUrl}}/recados/
 ?limit=10
 &offset=0
-Authorization: Bearer 123456
+
 ### Lista apenas um recado
 GET {{baseUrl}}/recados/7/
 
 ### Cria um recado
 POST {{baseUrl}}/recados/
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
   {
     "texto": "Recado de Elizangela para Marcelo",
-    "deId": 8,
     "paraId": 7
   }
 
 ### Atualiza um recado
-PATCH  {{baseUrl}}/recados/1/
+PATCH  {{baseUrl}}/recados/9/
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
   {
@@ -29,8 +32,8 @@ Content-Type: application/json
   }
 
 ### Apaga um recado
-DELETE {{baseUrl}}/recados/4/
-
+DELETE {{baseUrl}}/recados/9/
+Authorization: Bearer {{authToken}}
 
 ### AppControllerGet
 
@@ -53,28 +56,58 @@ GET {{baseUrl}}/conceitos-automatico/
 # PESSOAS
 ### Lista todas as pessoas
 GET {{baseUrl}}/pessoas/
+?limit=10
+&offset=0
+Authorization: Bearer {{authToken}}
 
 ### Lista apenas uma pessoa
 GET {{baseUrl}}/pessoas/4/
+Authorization: Bearer {{authToken}}
 
 ### Cria uma pessoa
 POST {{baseUrl}}/pessoas/
 Content-Type: application/json
 
   {
-    "email": "eliza@email.com",
+    "email": "luiz@gmail.com",
     "password": "123456",
-    "nome": "Elizângela"
+    "nome": "Luiz Otavio"
   }
 
 ### Atualiza uma pessoa
-PATCH  {{baseUrl}}/pessoas/6/
+PATCH  {{baseUrl}}/pessoas/10/
+Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
   {
     "password": "654321",
-    "nome": "Maria"  
+    "nome": "Isaac Pereira Farias"  
   }
 
 ### Apaga uma pessoa
-DELETE {{baseUrl}}/pessoas/3/
+DELETE {{baseUrl}}/pessoas/6/
+Authorization: Bearer {{authToken}}
+
+
+# AUTH
+### Rota para autenticação 
+# @name authenticate
+POST {{baseUrl}}/auth/
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "email": "luiz@gmail.com",
+  "password": "123456"
+}
+
+# RE-Autenticação
+### Rota para re-autenticação 
+# @name authenticate
+POST {{baseUrl}}/auth/refresh
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
