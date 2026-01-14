@@ -7,107 +7,104 @@
 GET {{baseUrl}}/recados/
 ?limit=10
 &offset=0
-
 ### Lista apenas um recado
-GET {{baseUrl}}/recados/7/
-
+GET {{baseUrl}}/recados/30/
 ### Cria um recado
 POST {{baseUrl}}/recados/
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
-  {
-    "texto": "Recado de Elizangela para Marcelo",
-    "paraId": 7
-  }
-
+{
+    "texto": "De LUIZ para Joana",
+    "paraId": 12
+}
 ### Atualiza um recado
-PATCH  {{baseUrl}}/recados/9/
+PATCH {{baseUrl}}/recados/70/
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
-  {
-    "texto": "Atualização do recado",
-    "lido": true  
-  }
-
+{
+    "texto": "De LUIZ para Joana",
+    "lido": true
+}
 ### Apaga um recado
-DELETE {{baseUrl}}/recados/9/
+DELETE {{baseUrl}}/recados/70/
 Authorization: Bearer {{authToken}}
 
-### AppControllerGet
 
-# @name AppControllerGet
+# 
 
-GET {{baseUrl}}/
 
-### ConceitosManualController
 
-# @name ConceitosManualController
-
-GET {{baseUrl}}/conceitos-manual/
-
-### ConceitosAutomaticoController
-
-# @name ConceitosAutomaticoController
-
-GET {{baseUrl}}/conceitos-automatico/
-
-# PESSOAS
+# Pessoas
 ### Lista todas as pessoas
 GET {{baseUrl}}/pessoas/
 ?limit=10
 &offset=0
 Authorization: Bearer {{authToken}}
-
 ### Lista apenas uma pessoa
-GET {{baseUrl}}/pessoas/4/
+GET {{baseUrl}}/pessoas/14/
 Authorization: Bearer {{authToken}}
-
 ### Cria uma pessoa
 POST {{baseUrl}}/pessoas/
 Content-Type: application/json
 
-  {
-    "email": "luiz@gmail.com",
+{
+    "email": "joao2@email.com",
     "password": "123456",
-    "nome": "Luiz Otavio"
-  }
-
+    "nome": "João"
+}
 ### Atualiza uma pessoa
-PATCH  {{baseUrl}}/pessoas/10/
-Authorization: Bearer {{authToken}}
-Content-Type: application/json
-
-  {
-    "password": "654321",
-    "nome": "Isaac Pereira Farias"  
-  }
-
-### Apaga uma pessoa
-DELETE {{baseUrl}}/pessoas/6/
-Authorization: Bearer {{authToken}}
-
-
-# AUTH
-### Rota para autenticação 
-# @name authenticate
-POST {{baseUrl}}/auth/
+PATCH {{baseUrl}}/pessoas/37/
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-  "email": "luiz@gmail.com",
-  "password": "123456"
+    "nome": "JOÃO"
 }
-
-# RE-Autenticação
-### Rota para re-autenticação 
-# @name authenticate
-POST {{baseUrl}}/auth/refresh
+### Apaga uma pessoa
+DELETE {{baseUrl}}/pessoas/37/
 Authorization: Bearer {{authToken}}
+
+
+
+# 
+
+
+
+# AUTH
+### Autenticação
+# @name authenticate
+POST {{baseUrl}}/auth/
+Content-Type: application/json
+
+{
+    "email": "joao2@email.com",
+    "password": "123456"
+}
+### Re-Autenticação
+# @name reAuthenticate
+POST {{baseUrl}}/auth/refresh/
+
 Content-Type: application/json
 
 {
   "refreshToken": "{{refreshToken}}"
 }
+
+
+# Upload
+### Foto da pessoa
+POST {{baseUrl}}/pessoas/upload-picture/
+Authorization: Bearer {{authToken}}
+Content-Type: multipart/form-data; boundary=----BoundaryDelimitadorHttp
+
+------BoundaryDelimitadorHttp
+Content-Disposition: form-data; name="file"; filename="isaac.jpg"
+Content-Type: image/jpg
+
+< ./dev/images/isaac.jpg
+------BoundaryDelimitadorHttp--
+
+### Ver foto
+GET {{baseUrl}}/pictures/13.jpg

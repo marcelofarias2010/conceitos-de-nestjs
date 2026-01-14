@@ -19,7 +19,7 @@ export class RoutePolicyGuard implements CanActivate {
       context.getHandler(),
     );
 
-    // Não precisamos de permissão para essa rota
+    // Não precisamos de permissões para essa rota
     // visto que nenhuma foi configurada
     if (!routePolicyRequired) {
       return true;
@@ -35,13 +35,11 @@ export class RoutePolicyGuard implements CanActivate {
       );
     }
 
-    const { pessoa }: { pessoa: Pessoa } = tokenPayload;
-
-    if (!pessoa.routePolicies.includes(routePolicyRequired)) {
-      throw new UnauthorizedException(
-        `Usuário não tem permissão ${routePolicyRequired}`,
-      );
-    }
+    //if (!pessoa.routePolicies.includes(routePolicyRequired)) {
+    //  throw new UnauthorizedException(
+    //    `Usuário não tem permissão ${routePolicyRequired}`,
+    //  );
+    //}
     return true;
   }
 }
